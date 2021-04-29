@@ -1,0 +1,29 @@
+{
+  "name": "tech-blog-mvc",
+  "version": "1.0.0",
+  "description": "Tech blog created using MVC Architecture",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vsjanarthani/Tech-Blog-MVC.git"
+  },
+  "author": "Janarthani V Subramaniam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vsjanarthani/Tech-Blog-MVC/issues"
+  },
+  "homepage": "https://github.com/vsjanarthani/Tech-Blog-MVC#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.1",
+    "dotenv": "^8.2.0",
+    "express-handlebars": "^5.3.0",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
+}
