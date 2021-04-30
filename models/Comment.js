@@ -1,6 +1,7 @@
 const { Model, DataTypes, Deferrable } = require('sequelize');
-const uuid = require('uuid/v4');
+const uuid = require('uuid');
 const sequelize = require('../config/connection');
+const { Blog, User } = require('./index');
 
 class Comment extends Model { }
 
@@ -50,3 +51,5 @@ Comment.init(
         modelName: 'comment'
     }
 );
+
+module.exports = Comment;

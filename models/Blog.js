@@ -1,9 +1,10 @@
-const { Model, DataTypes } = require('sequelize');
-const uuid = require('uuid/v4');
+const { Model, DataTypes, Deferrable } = require('sequelize');
+const uuid = require('uuid');
+const { Comment, User } = require('./index');
 
 const sequelize = require('../config/connection.js');
 
-class Blog extends Model {}
+class Blog extends Model { }
 
 Blog.init(
   {
@@ -21,22 +22,34 @@ Blog.init(
       }
     },
     contents: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     user_id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        validate: {
-            isUUID: true
-        },
-        references: {
-          model: User,
-          key: 'id',
-          deferrable: Deferrable.INITIALLY_IMMEDIATE
-        }
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        isUUID: true
+      },
+      references: {
+        model: User,
+        key: 'id',
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
-  },
+    },
+    comment_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        isUUID: true
+      },
+      references: {
+        model: Comment,
+        key: 'id',
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
+      }
+    }
+    },
   {
     sequelize,
     timestamps: true,

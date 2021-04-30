@@ -1,5 +1,5 @@
 const { Model, DataTypes, Deferrable } = require('sequelize');
-const uuid = require('uuid/v4');
+const uuid = require('uuid');
 const sequelize = require('../config/connection');
 
 class User extends Model { }
@@ -41,3 +41,5 @@ User.init(
         modelName: 'user'
     }
 );
+
+module.exports = User;
