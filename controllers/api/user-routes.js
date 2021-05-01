@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     
     try {
-        const { id } = req.params.id;
+        const { id } = req.params;
         const userById = await User.findOne({
             attributes: { exclude: ['password'] },
             where: { id }
@@ -34,6 +34,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const { username, email, password } = req.body
+        console.log(username, email, password);
         const newUser =  await User.create({
             username,
             email,
@@ -47,7 +48,10 @@ router.post('/', async (req, res) => {
 });
 
 // PUT /api/users/1
-router.put('/:id', (req, res) => {});
+router.put('/:id', (req, res) => {
+
+
+});
 
 // DELETE /api/users/1
 router.delete('/:id', (req, res) => {});

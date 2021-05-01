@@ -1,7 +1,7 @@
 const { Model, DataTypes, Deferrable } = require('sequelize');
 const uuid = require('uuid');
 const sequelize = require('../config/connection');
-const { Blog, User } = require('./index');
+
 
 class Comment extends Model { }
 
@@ -9,7 +9,7 @@ Comment.init(
     {
         id: {
             type: DataTypes.UUID,
-            defaultValue: () => uuid(),
+            defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             unique: true,
             primaryKey: true,
@@ -18,18 +18,6 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        blog_id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            validate: {
-                isUUID: true
-            },
-            references: {
-                model: Blog,
-                key: 'id',
-                deferrable: Deferrable.INITIALLY_IMMEDIATE
-            }
-        },
         user_id: {
             type: DataTypes.UUID,
             allowNull: false,
@@ -37,15 +25,24 @@ Comment.init(
                 isUUID: true
             },
             references: {
-                model: User,
+                model: 'user',
                 key: 'id',
                 deferrable: Deferrable.INITIALLY_IMMEDIATE
             }
-        }
+        },
+        blog_id: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            references: {
+              model: 'blog',
+              key: 'id',
+              deferrable: Deferrable.INITIALLY_IMMEDIATE
+            }
+          }
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
         modelName: 'comment'
