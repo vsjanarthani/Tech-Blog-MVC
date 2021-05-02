@@ -21,9 +21,6 @@ Comment.init(
         user_id: {
             type: DataTypes.UUID,
             allowNull: false,
-            validate: {
-                isUUID: true
-            },
             references: {
                 model: 'user',
                 key: 'id',

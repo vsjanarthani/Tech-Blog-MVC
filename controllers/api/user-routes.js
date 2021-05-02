@@ -4,9 +4,7 @@ const { User } = require('../../models');
 // GET /api/users
 router.get('/', async (req, res) => {
   try {
-    const allUsers = await User.findAll(({
-      attributes: { exclude: ['password'] }
-    }));
+    const allUsers = await User.findAll();
     res.status(200).json(allUsers);
   }
   catch (e) {
@@ -50,11 +48,36 @@ router.post('/', async (req, res) => {
   }
 });
 
+// POST /api/users/login
+router.post('/login', async (req, res) => {
+  // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+  try {
+    const { email, password } = req.body
+    const userLogin = await User.findOne({
+      where: { email }
+    });
+    // console.log('User Login', userLogin);
+    if (!userLogin.email) {
+      return res.status(400).json({ message: 'No user with that email address!' });
+    }
+    const validPassword = await userLogin.checkPassword(password);
+    // console.log(validPassword);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Incorrect password!' });  
+    }
+    res.json({ user: userLogin.username, message: 'You are now logged in!' });
+  }
+  catch (e) {
+    res.status(400).json({ Error: e });
+  }
+});
+
 // PUT /api/users/id
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     await User.update(req.body, {
+      individualHooks: true,
       where: { id }
     });
     const userById = await User.findOne({
@@ -64,7 +87,7 @@ router.put('/:id', async (req, res) => {
     if (!userById) {
       return res.status(404).json({ message: 'No user found with this id' });
     }
-    res.status(200).json({Updated: userById});
+    res.status(200).json({ Updated: userById });
   }
   catch (e) {
     res.status(400).json({ Error: e });
@@ -88,6 +111,6 @@ router.delete('/:id', async (req, res) => {
   } catch (e) {
     res.status(400).json(e);
   }
- });
+});
 
 module.exports = router;

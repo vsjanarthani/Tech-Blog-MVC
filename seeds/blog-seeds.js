@@ -3,7 +3,7 @@ const { Blog } = require('../models');
 const blogData = [
   {
     id: '336290ae-32f7-4ea6-bfd6-716b618c0f22',
-    blog_title: '5 resons why I lovbe JavaScript',
+    blog_title: '5 resons why I love JavaScript',
     blog_contents: `1. Its easy to learn, 
     2. JavaScript is employed everywhere on the web,
     3. It gives the power to make rich interface, 

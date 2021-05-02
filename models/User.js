@@ -1,8 +1,15 @@
 const { Model, DataTypes, Deferrable } = require('sequelize');
+const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const sequelize = require('../config/connection');
 
-class User extends Model { }
+// create User model
+class User extends Model {
+    // set up method to run on instance data (per user) to check password
+    async checkPassword(loginPw) {
+        return await bcrypt.compareSync(loginPw, this.password);
+    }
+}
 
 User.init(
     {
@@ -36,6 +43,24 @@ User.init(
         }
     },
     {
+        hooks: {
+            // set up beforeCreate lifecycle "hook" functionality
+            async beforeBulkCreate(newUserData) {
+                for(const user of newUserData) {
+                    user.password = await bcrypt.hash(user.password, 10);
+                }
+                return newUserData;
+            },
+            async beforeCreate(newUserData) {
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
+                return newUserData;
+            },
+            // set up beforeUpdate lifecycle "hook" functionality
+            async beforeUpdate(updatedUserData) {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                return updatedUserData;
+            }
+        },
         sequelize,
         timestamps: false,
         freezeTableName: true,
