@@ -13,7 +13,7 @@ Comment.belongsTo(User, {foreignKey: `user_id`});
 Comment.belongsTo(Blog, {foreignKey: `blog_id`});
 
 // User has many Blogs
-User.hasMany(Blog);
+User.hasMany(Blog, {foreignKey: `user_id`});
 
 // User has many Comments
 User.hasMany(Comment);
