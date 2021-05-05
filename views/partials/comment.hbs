@@ -1,0 +1,14 @@
+<div class="container-fluid p-2 m-2 d-flex flex-column align-self-center">
+
+    {{#each this}}
+    <div class="container d-flex">
+        <div class="row border border-dark">
+            <div class="col-12 p-2 d-flex justify-content-between align-items-baseline">
+                <h5 class="fw-lighter p-2">{{comment}}</h5>
+                <h6 class="fst-italic fw-lighter p-2">Posted by {{user.username}} on {{updatedAt}}</h6>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+</div>

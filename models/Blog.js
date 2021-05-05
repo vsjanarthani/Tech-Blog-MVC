@@ -24,11 +24,6 @@ Blog.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
-    // created_at: {
-    //   type: DataTypes.DATE,
-    //   defaultValue: DataTypes.DATE,
-    //   allowNull: false
-    // },
     user_id: {
       type: DataTypes.UUID,
       allowNull: false,

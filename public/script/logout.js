@@ -2,7 +2,7 @@
 const logoutEl = document.querySelector('#logout');
 
 // Function to logout
-logoutEl.addEventListener('click', async function logout(event) {
+logoutEl.addEventListener('click', async (event) => {
     if (event) {
         try {
             const response = await fetch('/api/users/logout', {
@@ -22,6 +22,5 @@ logoutEl.addEventListener('click', async function logout(event) {
             console.log(e);
         }
     }
-
 });
 

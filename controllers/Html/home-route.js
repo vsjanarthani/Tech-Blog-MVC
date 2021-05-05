@@ -28,7 +28,7 @@ router.get('/', async(req, res) => {
     });
     const blogs = allBlogs.map(blog => blog.get({ plain: true }));
     res.render('homepage', { blogs });
-    console.log(blogs);
+    // console.log(blogs);
   }
   catch (e) {
     res.status(400).json({ Error: e });
