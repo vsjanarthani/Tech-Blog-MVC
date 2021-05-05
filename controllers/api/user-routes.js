@@ -1,10 +1,12 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Blog, Comment } = require('../../models');
 
-// GET /api/users
+// GET /api/users - Get All users
 router.get('/', async (req, res) => {
   try {
-    const allUsers = await User.findAll();
+    const allUsers = await User.findAll({
+      attributes: { exclude: ['password'] }
+    });
     res.status(200).json(allUsers);
   }
   catch (e) {
@@ -12,15 +14,27 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/users/id
+// GET /api/users/id - Get user by Id and their blogs and comments
 router.get('/:id', async (req, res) => {
-
   try {
     const { id } = req.params;
     const userById = await User.findOne({
       attributes: { exclude: ['password'] },
-      where: { id }
+      where: { id },
+      include: [{
+        model: Blog,
+        attributes: ['id', 'blog_title', 'blog_contents', 'createdAt']
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'comment', 'createdAt'],
+        include: {
+          model: Blog,
+          attributes: ['blog_title']
+        }
+      }]
     });
+
     if (!userById) {
       return res.status(404).json({ message: 'No user found with this id' });
     }
@@ -31,19 +45,24 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST /api/users
+// POST /api/users - Sign up
 router.post('/', async (req, res) => {
   try {
     const { username, email, password } = req.body
-    console.log(username, email, password);
     const newUser = await User.create({
       username,
       email,
       password
     });
+    req.session.save((newUser) => {
+      req.session.user_id = newUser.id;
+      req.session.username = newUser.username;
+      req.session.loggedIn = true;
+    });
     res.status(200).json(newUser);
   }
   catch (e) {
+    console.log(e);
     res.status(400).json({ Error: e });
   }
 });
@@ -56,15 +75,23 @@ router.post('/login', async (req, res) => {
     const userLogin = await User.findOne({
       where: { email }
     });
-    // console.log('User Login', userLogin);
+    console.log('User Login', userLogin);
     if (!userLogin.email) {
       return res.status(400).json({ message: 'No user with that email address!' });
     }
     const validPassword = await userLogin.checkPassword(password);
-    // console.log(validPassword);
+    console.log(validPassword);
     if (!validPassword) {
-      return res.status(400).json({ message: 'Incorrect password!' });  
+      return res.status(400).json({ message: 'Incorrect password!' });
     }
+
+    req.session.save((userLogin) => {
+      req.session.user_id = userLogin.id;
+      req.session.username = userLogin.username;
+      req.session.loggedIn = true; 
+      console.log(req.session.user_id);
+    });
+
     res.status(200).json({ user: userLogin.username, message: 'You are now logged in!' });
   }
   catch (e) {
