@@ -4,7 +4,7 @@
         {{#if posts}}
         {{#each posts}}
         <div class="container d-flex">
-            <div class="row border border-dark">
+            <div class="row col-12 border border-dark">
                 <div class="col-12 p-2 text-white bg-dark d-flex justify-content-between align-items-baseline">
                     <a class="fw-lighter p-2 text-white" href="/posts/{{id}}">{{post_title}}</a>
                     <h6 class="fst-italic fw-lighter p-2">Posted by {{user.username}} on {{createdAt}}</h6>
@@ -16,7 +16,7 @@
         <div class="container d-flex">
             <div class="row p-2">
                 <div class="col-12 p-2 justify-content-center">
-                    <h6 class="fw-lighter fst-italic">Post <b>{{post_title}}</b> has {{comments.length}} comment(s)</h6>
+                    <h6 class="fw-lighter fst-italic">Post: <b>{{post_title}}</b> has {{comments.length}} comment(s)</h6>
                 </div>
             </div>
         </div>

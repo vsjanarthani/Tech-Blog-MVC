@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #99B898;">
       <div class="container-fluid">
-        <h1 class="col-3 btn btn-rounded fs-3" style="background-color: #90b48f; width: 15rem;">Tech Blog</h1>
+        <h1 class="col-3 btn btn-rounded fs-3" style="background-color: #90b48f; width: 15rem;"><a class="nav-link text-dark" href="/">Tech Blog</a></h1>
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarTogglerDemo03"
           aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars text-dark"></i>
@@ -11,17 +11,18 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
-           
+           {{#if loggedIn}}
             <li class="nav-item">
               <a class="nav-link text-dark" href="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
               <a id="logout" class="nav-link text-dark" href="/">Logout</a>
             </li>
-           
+            {{else}}
             <li class="nav-item">
               <a class="nav-link text-dark" href="/login">Login</a>
             </li>
+              {{/if}}
         
           </ul>
         </div>

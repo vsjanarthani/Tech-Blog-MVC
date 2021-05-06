@@ -1,95 +1,102 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
-// const sessionauth = require('../../utils/auth');
+
+
+
+// Function to prompt login if idle
+const sessionauth = (req, res, next) => {
+    // if (!req.session.user_id) 
+    if (req.session) { // change this line later
+        res.redirect('/login');
+    } else {
+        next();
+    }
+};
 
 // Get /dashboard
-// router.get('/', sessionauth, (req, res) => {
-//     Post.findAll({
-//             where: {
-//                 user_id: req.session.user_id
-//             },
-//             attributes: [
-//                 'id',
-//                 'post_title',
-//                 'post_contents',
-//                 'createdAt'
-//             ],
-//             include: [{
-//                     model: Comment,
-//                     attributes: ['id', 'comment', 'post_id', 'user_id', 'createdAt'],
-//                     include: {
-//                         model: User,
-//                         attributes: ['username']
-//                     }
-//                 },
-//                 {
-//                     model: User,
-//                     attributes: ['username']
-//                 }
-//             ]
-//         })
-//         .then(dbPostData => {
-//             const posts = dbPostData.map(post => post.get({
-//                 plain: true
-//             }));
-//             res.render('dashboard', {
-//                 posts,
-//                 loggedIn: true
-//             });
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-// });
+router.get('/', sessionauth, async (req, res) => {
+    try {
+        const postsByUser = await Post.findAll({
+            where: {
+                user_id: 'f7922fa0-b26a-4223-b1c5-172799866878'   // should change to req.session.user_id
+            },
+            attributes: [
+                'id',
+                'post_title',
+                'post_contents',
+                'createdAt'
+            ],
+            include: [{
+                model: Comment,
+                attributes: ['id', 'comment', 'post_id', 'user_id', 'createdAt'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+            ]
+        });
+
+        const posts = postsByUser.map(post => post.get({ plain: true }));
+        res.render('dashboard', {
+            posts,
+            loggedIn: true
+        });
+    }
+    catch (e) {
+        res.status(400).json({ Error: e });
+    }
+});
 
 // Get /dashboard/edit/:id
-// router.get('/edit/:id', sessionauth, (req, res) => {
-//     Post.findOne({
-//             where: {
-//                 id: req.params.id
-//             },
-//             attributes: [
-//                 'id',
-//                 'post_title',
-//                 'post_contents',
-//                 'createdAt'
-//             ],
-//             include: [{
-//                 model: Comment,
-//                 attributes: ['id', 'comment', 'post_id', 'user_id', 'createdAt'],
-//                 include: {
-//                     model: User,
-//                     attributes: ['username']
-//                 }
-//             },
-//             {
-//                 model: User,
-//                 attributes: ['username']
-//             }
-//         ]
-//         })
-//         .then(response => {
-//             if (!response) {
-//                return res.status(404).json({
-//                     message: 'No post post found with this id'
-//                 });
-//             }
+router.get('/edit/:id', sessionauth, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const postToEdit = await Post.findOne({
+            where: { id },
+            attributes: [
+                'id',
+                'post_title',
+                'post_contents',
+                'createdAt'
+            ],
+            include: [{
+                model: Comment,
+                attributes: ['id', 'comment', 'post_id', 'user_id', 'createdAt'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+            ]
+        });
 
-//             const post = response.get({
-//                 plain: true
-//             });
+        console.log(postToEdit);
 
-//             res.render('edit-post', {
-//                 post,
-//                 loggedIn: true
-//             });
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-// })
+        if (!postToEdit) {
+            return res.status(404).json({ message: 'No Post found with this id' });
+        }
+        const post = postToEdit.get({ plain: true });
+
+        console.log(post);
+        
+        res.render('edit-post', {
+            post,
+            loggedIn: true
+        });
+    }
+    catch (e) {
+        res.status(400).json({ Error: e });
+    }
+});
 
 router.get('/new', (req, res) => {
     res.render('add-post', {

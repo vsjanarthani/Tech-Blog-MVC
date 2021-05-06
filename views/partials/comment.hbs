@@ -1,23 +1,4 @@
-{{#if comments}}
-
-<div class="container mb-4 d-flex flex-column border border-dark">
-    <div class="row p-2 border-bottom border-dark">
-        <div class="col-12 p-2">
-            <h6 class="fw-bold text-center">Comments</h6>
-        </div>
-    </div>
-    <div class="row p-2">
-        <ul class="col-12 p-2" style="list-style-type:none">
-            {{#each comments}}
-            <li class="p-2">{{comment}} <h6 class="fst-italic fw-lighter p-2">Posted by {{user.username}} on
-                    {{updatedAt}}
-                </h6>
-            </li>
-
-            {{/each}}
-        </ul>
-    </div>
-</div>
-
-
-{{/if}}
+<li class="p-2">{{comment}} <h6 class="fst-italic fw-lighter p-2">Posted by {{user.username}} on
+        {{updatedAt}}
+    </h6>
+</li>
