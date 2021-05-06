@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Blog, Comment } = require('../../models');
+const { User, Post, Comment } = require('../../models');
 
 // GET /api/users - Get All users
 router.get('/', async (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/users/id - Get user by Id and their blogs and comments
+// GET /api/users/id - Get user by Id and their posts and comments
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -22,15 +22,15 @@ router.get('/:id', async (req, res) => {
       attributes: { exclude: ['password'] },
       where: { id },
       include: [{
-        model: Blog,
-        attributes: ['id', 'blog_title', 'blog_contents', 'createdAt']
+        model: Post,
+        attributes: ['id', 'post_title', 'post_contents', 'createdAt']
       },
       {
         model: Comment,
         attributes: ['id', 'comment', 'createdAt'],
         include: {
-          model: Blog,
-          attributes: ['blog_title']
+          model: Post,
+          attributes: ['post_title']
         }
       }]
     });

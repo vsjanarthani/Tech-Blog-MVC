@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vsjanarthani/Tech-Blog-MVC.git"
+    "url": "git+https://github.com/vsjanarthani/Tech-Post-MVC.git"
   },
   "author": "Janarthani V Subramaniam",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vsjanarthani/Tech-Blog-MVC/issues"
+    "url": "https://github.com/vsjanarthani/Tech-Post-MVC/issues"
   },
-  "homepage": "https://github.com/vsjanarthani/Tech-Blog-MVC#readme",
+  "homepage": "https://github.com/vsjanarthani/Tech-Post-MVC#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.1",

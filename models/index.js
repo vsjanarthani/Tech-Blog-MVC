@@ -1,29 +1,29 @@
 // import models
-const Blog = require('./Blog');
+const Post = require('./Post');
 const User = require('./User');
 const Comment = require('./Comment');
 
-// Blog belongsTo User
-Blog.belongsTo(User, {foreignKey: `user_id`});
+// Post belongsTo User
+Post.belongsTo(User, {foreignKey: `user_id`});
 
 // Comment belongsTo User
 Comment.belongsTo(User, {foreignKey: `user_id`});
 
-// Comment belongsTo blog
-Comment.belongsTo(Blog, {foreignKey: `blog_id`});
+// Comment belongsTo post
+Comment.belongsTo(Post, {foreignKey: `post_id`});
 
-// User has many Blogs
-User.hasMany(Blog, {foreignKey: `user_id`});
+// User has many Posts
+User.hasMany(Post, {foreignKey: `user_id`});
 
 // User has many Comments
 User.hasMany(Comment);
 
-// Blog has many comments
-Blog.hasMany(Comment);
+// Post has many comments
+Post.hasMany(Comment);
 
 
 module.exports = {
-Blog,
+Post,
 User,
 Comment
 };

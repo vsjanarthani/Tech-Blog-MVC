@@ -27,11 +27,11 @@ Comment.init(
                 deferrable: Deferrable.INITIALLY_IMMEDIATE
             }
         },
-        blog_id: {
+        post_id: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-              model: 'blog',
+              model: 'post',
               key: 'id',
               deferrable: Deferrable.INITIALLY_IMMEDIATE
             }

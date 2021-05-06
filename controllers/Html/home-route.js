@@ -1,20 +1,20 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Blog, User, Comment } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 
 router.get('/', async(req, res) => {
   try {
-    const allBlogs = await Blog.findAll({
+    const allPosts = await Post.findAll({
       attributes: [
         'id',
-        'blog_title',
-        'blog_contents',
+        'post_title',
+        'post_contents',
         'createdAt'
       ],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment', 'blog_id', 'user_id', 'updatedAt'],
+          attributes: ['id', 'comment', 'post_id', 'user_id', 'updatedAt'],
           include: {
             model: User,
             attributes: ['username']
@@ -26,11 +26,8 @@ router.get('/', async(req, res) => {
         }
       ]
     });
-    const blogs = allBlogs.map(blog => blog.get({ plain: true }));
-   
-    res.render('homepage', { blogs });
-    // const blogsArr = allBlogs.map(blog => JSON.stringify(blog.comments));
-    // console.log(blogsArr);
+    const posts = allPosts.map(post => post.get({ plain: true }));
+    res.render('homepage', { posts });
   }
   catch (e) {
     res.status(400).json({ Error: e });

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment, Blog, User } = require('../../models');
+const { Comment, Post, User } = require('../../models');
 
 // GET /api/comments
 router.get('/', async (req, res) => {
@@ -9,8 +9,8 @@ router.get('/', async (req, res) => {
                 model: User,
                 attributes: ['username'],
                 include: [{
-                    model: Blog,
-                    attributes: ['blog_title']
+                    model: Post,
+                    attributes: ['post_title']
                 }]
             }]
         });
@@ -30,8 +30,8 @@ router.get('/:id', async (req, res) => {
                 model: User,
                 attributes: ['username'],
                 include: [{
-                    model: Blog,
-                    attributes: ['blog_title']
+                    model: Post,
+                    attributes: ['post_title']
                 }]
             }],
             where: { id }
@@ -50,11 +50,11 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         // console.log(req.body);
-        const { comment, user_id, blog_id} = req.body;
+        const { comment, user_id, post_id} = req.body;
         const newComment = await Comment.create({
             comment,
             user_id,
-            blog_id
+            post_id
         });
         res.status(200).json(newComment);
     }

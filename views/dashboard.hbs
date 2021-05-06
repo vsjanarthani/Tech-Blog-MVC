@@ -1,19 +1,19 @@
 <div class="container-fluid p-2 m-2 d-flex flex-column align-self-center">
     <div class="container d-flex">
-        <button id="addblog" type="button" class="btn btn-dark btn-lg">Add New Post</button>
+        <button id="addpost" type="button" class="btn btn-dark btn-lg">Add New Post</button>
     </div>
 
-    {{#if blogs}}
-    {{#each blogs}}
+    {{#if posts}}
+    {{#each posts}}
     <div class="container d-flex">
         <div class="row border border-dark">
             <div class="col-12 p-2 text-white bg-dark d-flex justify-content-between align-items-baseline">
-                <a class="fw-lighter p-2 text-white">{{blog_title}}</a>
+                <a class="fw-lighter p-2 text-white">{{post_title}}</a>
                 <button type="button" class="btn btn-dark btn-floating"><i class="fab fa-mdb"></i></button>
                 <button type="button" class="btn btn-dark btn-floating"><i class="far fa-trash-alt"></i></button>
             </div>
             <div class="col-12 p-2 justify-content-center">
-                <p>{{blog_contents}}</p>
+                <p>{{post_contents}}</p>
             </div>
         </div>
     </div>
@@ -28,4 +28,5 @@
 
 </div>
 
-<script src="/script/add-blog.js"></script>
+<script src="/script/add-post.js"></script>
+<script src="/script/edit-post.js"></script>

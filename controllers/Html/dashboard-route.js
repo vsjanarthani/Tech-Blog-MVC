@@ -1,22 +1,22 @@
 const router = require('express').Router();
-const { Blog, User, Comment } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 // const sessionauth = require('../../utils/auth');
 
 // Get /dashboard
 // router.get('/', sessionauth, (req, res) => {
-//     Blog.findAll({
+//     Post.findAll({
 //             where: {
 //                 user_id: req.session.user_id
 //             },
 //             attributes: [
 //                 'id',
-//                 'blog_title',
-//                 'blog_contents',
+//                 'post_title',
+//                 'post_contents',
 //                 'createdAt'
 //             ],
 //             include: [{
 //                     model: Comment,
-//                     attributes: ['id', 'comment', 'blog_id', 'user_id', 'createdAt'],
+//                     attributes: ['id', 'comment', 'post_id', 'user_id', 'createdAt'],
 //                     include: {
 //                         model: User,
 //                         attributes: ['username']
@@ -45,19 +45,19 @@ const { Blog, User, Comment } = require('../../models');
 
 // Get /dashboard/edit/:id
 // router.get('/edit/:id', sessionauth, (req, res) => {
-//     Blog.findOne({
+//     Post.findOne({
 //             where: {
 //                 id: req.params.id
 //             },
 //             attributes: [
 //                 'id',
-//                 'blog_title',
-//                 'blog_contents',
+//                 'post_title',
+//                 'post_contents',
 //                 'createdAt'
 //             ],
 //             include: [{
 //                 model: Comment,
-//                 attributes: ['id', 'comment', 'blog_id', 'user_id', 'createdAt'],
+//                 attributes: ['id', 'comment', 'post_id', 'user_id', 'createdAt'],
 //                 include: {
 //                     model: User,
 //                     attributes: ['username']
@@ -72,16 +72,16 @@ const { Blog, User, Comment } = require('../../models');
 //         .then(response => {
 //             if (!response) {
 //                return res.status(404).json({
-//                     message: 'No blog post found with this id'
+//                     message: 'No post post found with this id'
 //                 });
 //             }
 
-//             const blog = response.get({
+//             const post = response.get({
 //                 plain: true
 //             });
 
-//             res.render('edit-blog', {
-//                 blog,
+//             res.render('edit-post', {
+//                 post,
 //                 loggedIn: true
 //             });
 //         })
@@ -92,7 +92,7 @@ const { Blog, User, Comment } = require('../../models');
 // })
 
 router.get('/new', (req, res) => {
-    res.render('add-blog', {
+    res.render('add-post', {
         loggedIn: true
     })
 });

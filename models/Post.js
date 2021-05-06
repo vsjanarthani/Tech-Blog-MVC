@@ -3,9 +3,9 @@ const uuid = require('uuid');
 
 const sequelize = require('../config/connection.js');
 
-class Blog extends Model { }
+class Post extends Model { }
 
-Blog.init(
+Post.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -13,14 +13,14 @@ Blog.init(
       allowNull: false,
       primaryKey: true
     },
-    blog_title: {
+    post_title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1, 120]
       }
     },
-    blog_contents: {
+    post_contents: {
       type: DataTypes.TEXT,
       allowNull: false
     },
@@ -39,8 +39,8 @@ Blog.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'blog',
+    modelName: 'post',
   }
 );
 
-module.exports = Blog;
+module.exports = Post;
