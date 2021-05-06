@@ -1,22 +1,22 @@
 const router = require('express').Router();
-const sequelize = require('../../config/connection');
 const { Blog, User, Comment } = require('../../models');
-const sessionauth = require('../../utils/auth');
+// const sessionauth = require('../../utils/auth');
 
+// Get /dashboard
 // router.get('/', sessionauth, (req, res) => {
-//     Post.findAll({
+//     Blog.findAll({
 //             where: {
 //                 user_id: req.session.user_id
 //             },
 //             attributes: [
 //                 'id',
-//                 'title',
-//                 'content',
-//                 'created_at'
+//                 'blog_title',
+//                 'blog_contents',
+//                 'createdAt'
 //             ],
 //             include: [{
 //                     model: Comment,
-//                     attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+//                     attributes: ['id', 'comment', 'blog_id', 'user_id', 'createdAt'],
 //                     include: {
 //                         model: User,
 //                         attributes: ['username']
@@ -43,45 +43,45 @@ const sessionauth = require('../../utils/auth');
 //         });
 // });
 
-// router.get('/edit/:id', withAuth, (req, res) => {
-//     Post.findOne({
+// Get /dashboard/edit/:id
+// router.get('/edit/:id', sessionauth, (req, res) => {
+//     Blog.findOne({
 //             where: {
 //                 id: req.params.id
 //             },
 //             attributes: [
 //                 'id',
-//                 'title',
-//                 'content',
-//                 'created_at'
+//                 'blog_title',
+//                 'blog_contents',
+//                 'createdAt'
 //             ],
 //             include: [{
-//                     model: Comment,
-//                     attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-//                     include: {
-//                         model: User,
-//                         attributes: ['username']
-//                     }
-//                 },
-//                 {
+//                 model: Comment,
+//                 attributes: ['id', 'comment', 'blog_id', 'user_id', 'createdAt'],
+//                 include: {
 //                     model: User,
 //                     attributes: ['username']
 //                 }
-//             ]
+//             },
+//             {
+//                 model: User,
+//                 attributes: ['username']
+//             }
+//         ]
 //         })
-//         .then(dbPostData => {
-//             if (!dbPostData) {
-//                 res.status(404).json({
-//                     message: 'No post found with this id'
+//         .then(response => {
+//             if (!response) {
+//                return res.status(404).json({
+//                     message: 'No blog post found with this id'
 //                 });
-//                 return;
 //             }
 
-//             const post = dbPostData.get({
+//             const blog = response.get({
 //                 plain: true
 //             });
 
-//             res.render('edit-post', {
-//                 post,
+//             res.render('edit-blog', {
+//                 blog,
 //                 loggedIn: true
 //             });
 //         })
@@ -91,10 +91,10 @@ const sessionauth = require('../../utils/auth');
 //         });
 // })
 
-// router.get('/new', (req, res) => {
-//     res.render('add-post', {
-//         loggedIn: true
-//     })
-// })
+router.get('/new', (req, res) => {
+    res.render('add-blog', {
+        loggedIn: true
+    })
+});
 
 module.exports = router;

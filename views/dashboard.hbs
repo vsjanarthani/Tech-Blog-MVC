@@ -12,16 +12,16 @@
                 <button type="button" class="btn btn-dark btn-floating"><i class="fab fa-mdb"></i></button>
                 <button type="button" class="btn btn-dark btn-floating"><i class="far fa-trash-alt"></i></button>
             </div>
-            <div class="col-12 p-2 justify-content-center"><p>{{blog_contents}}</p></div>
+            <div class="col-12 p-2 justify-content-center">
+                <p>{{blog_contents}}</p>
+            </div>
         </div>
     </div>
 
     <div class="container d-flex">
-        <div class="row p-2">
-            <div class="col-12 p-2 justify-content-center">
-                <h6 class="fw-lighter fst-italic">Blog <b>{{blog_title}}</b> has {{comments.length}} comment(s)</h6>
-            </div>
-        </div>
+
+    {{> comment}}
+
     </div>
     {{/each}}
     {{/if}}

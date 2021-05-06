@@ -30,8 +30,8 @@ app.use(session({
   saveUninitialized: true,
   store: new SequalizeStore({
     db: sequelize,
-    checkExpirationInterval: 1000*60*15, //Will check every 15 mintues
-    expiration: 1000*60*30 //Expire after half an hour
+    // checkExpirationInterval: 1000*60*15, //Will check every 15 mintues
+    // expiration: 1000*60*30 //Expire after half an hour
   })
 }));
 
