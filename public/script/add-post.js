@@ -17,17 +17,14 @@ addpostBtnEl.addEventListener('click', (event) => {
 if (createpostBtnEl) {
 createpostBtnEl.addEventListener('click', async (event) => {
     event.preventDefault();
-
     const post_title = postTitleEl.value.trim();
     const post_contents = postContentEl.value.trim();
-    const user_id = 'f7922fa0-b26a-4223-b1c5-172799866878';
     try {
         const response = await fetch(`/api/posts`, {
             method: 'POST',
             body: JSON.stringify({
                 post_title,
-                post_contents,
-                user_id
+                post_contents
             }),
             headers: {
                 'Content-Type': 'application/json'

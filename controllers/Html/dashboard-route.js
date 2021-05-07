@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 
-
-
 // Function to prompt login if idle
 const sessionauth = (req, res, next) => {
     // if (!req.session.user_id) 
@@ -87,7 +85,7 @@ router.get('/edit/:id', sessionauth, async (req, res) => {
         const post = postToEdit.get({ plain: true });
 
         console.log(post);
-        
+
         res.render('edit-post', {
             post,
             loggedIn: true

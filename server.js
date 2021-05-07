@@ -3,7 +3,7 @@ const express = require('express');
 const sequelize = require('./config/connection');
 const routes = require('./controllers');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({ extname: 'hbs', defaultLayout: 'index' });
+const hbs = exphbs.create({ extname: 'hbs', defaultLayout: 'main' });
 const session = require('express-session');
 const SequalizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Session middleware
 app.use(session({
   secret: process.env.SESSION_KEY,
+  cookie: {},
   resave: false,
   saveUninitialized: true,
   store: new SequalizeStore({

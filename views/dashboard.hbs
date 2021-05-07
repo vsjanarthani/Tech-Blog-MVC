@@ -1,4 +1,5 @@
 <div class="container-fluid p-2 m-2 d-flex flex-column">
+
     <div class="container d-flex">
         <button id="addpost" type="button" class="btn btn-dark btn-lg">Add New Post</button>
     </div>
@@ -9,8 +10,10 @@
         <div class="row col-12 border border-dark">
             <div class="col-12 p-2 text-white bg-dark d-flex justify-content-between align-items-baseline">
                 <a class="fw-lighter p-2 text-white">{{post_title}}</a>
-                <button id="edit-post" name="{{id}}" type="button" class="btn btn-dark btn-floating"><i class="far fa-edit fa-2x"></i></button>
-                <button id="delete-post" name="{{id}}" type="button" class="btn btn-dark btn-floating"><i class="far fa-trash-alt fa-2x"></i></button>
+                <button id="edit-post" name="{{id}}" type="button" class="btn btn-dark btn-floating"><i
+                        class="far fa-edit fa-2x"></i></button>
+                <button id="delete-post" name="{{id}}" type="button" class="btn btn-dark btn-floating"><i
+                        class="far fa-trash-alt fa-2x"></i></button>
             </div>
             <div class="col-12 p-2 justify-content-center">
                 <p>{{post_contents}}</p>
@@ -44,24 +47,26 @@
                     <h6 class="fw-bold text-center">There are no comments for this blog post yet!</h6>
                 </div>
             </div>
-            {{/unless}}
-
         </div>
-        {{/each}}
-        {{/if}}
-
-        {{#unless posts}}
-        <div class="container mt-4 d-flex flex-column border border-dark">
-            <div class="row p-2">
-                <div class="col-12 p-2">
-                    <h6 class="fw-bold text-center">You don't have any posts yet! Click on Add Post to add a new post</h6>
-                </div>
-            </div>
         {{/unless}}
+
 
     </div>
 
-</div>
+    {{/each}}
+    {{/if}}
 
-        <script src="/script/add-post.js"></script>
-        <script src="/script/edit-post.js"></script>
+
+
+    {{#unless posts}}
+    <div class="container mt-4 d-flex flex-column border border-dark">
+        <div class="row p-2">
+            <div class="col-12 p-2">
+                <h6 class="fw-bold text-center">You don't have any posts yet! Click on Add Post to add a new post</h6>
+            </div>
+        </div>
+    </div>
+    {{/unless}}
+
+    <script src="/script/add-post.js"></script>
+    <script src="/script/edit-post.js"></script>
