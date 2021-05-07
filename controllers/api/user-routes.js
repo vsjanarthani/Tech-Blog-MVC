@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 
+
 // GET /api/users - Get All users
 router.get('/', async (req, res) => {
   try {
@@ -54,7 +55,7 @@ router.post('/', async (req, res) => {
       email,
       password
     });
-    // req.session.save((newUser) => {
+    // req.session.save(() => {
     //   req.session.user_id = newUser.id;
     //   req.session.username = newUser.username;
     //   req.session.loggedIn = true;
@@ -85,7 +86,7 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Incorrect password!' });
     }
 
-    // req.session.save((userLogin) => {
+    // req.session.save(() => {
     //   req.session.user_id = userLogin.id;
     //   req.session.username = userLogin.username;
     //   req.session.loggedIn = true; 

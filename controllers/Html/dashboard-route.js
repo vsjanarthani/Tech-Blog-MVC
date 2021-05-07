@@ -1,15 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
-
-// Function to prompt login if idle
-const sessionauth = (req, res, next) => {
-    // if (!req.session.user_id) 
-    if (req.session) { // change this line later
-        res.redirect('/login');
-    } else {
-        next();
-    }
-};
+const sessionauth = require('../../utils/sessionauth');
 
 // Get /dashboard
 router.get('/', sessionauth, async (req, res) => {

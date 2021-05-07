@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Comment, Post, User } = require('../../models');
+const sessionAuth = require('../../utils/sessionauth');
 
 // GET /api/comments
 router.get('/', async (req, res) => {
@@ -47,7 +48,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/comments
-router.post('/', async (req, res) => {
+router.post('/', sessionAuth, async (req, res) => {
     try {
         // console.log(req.body);
         const { comment, post_id} = req.body;

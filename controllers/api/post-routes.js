@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
+const sessionAuth = require('../../utils/sessionauth');
 
 // GET /api/posts
 router.get('/', async (req, res) => {
@@ -51,7 +52,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/posts
-router.post('/', async (req, res) => {
+router.post('/', sessionAuth, async (req, res) => {
   try {
     // console.log(req.body);
     const { post_title, post_contents} = req.body;
@@ -70,7 +71,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT /api/posts/id
-router.put('/:id', async (req, res) => {
+router.put('/:id', sessionAuth, async (req, res) => {
   try {
     const { id } = req.params;
     await Post.update(req.body, {
@@ -90,7 +91,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE /api/posts/id
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', sessionAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const postById = await Post.findOne({
