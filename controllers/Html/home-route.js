@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
     });
     const posts = allPosts.map(post => post.get({ plain: true }));
     res.render('homepage', { posts, 
-      loggedIn: true //Need to change this line to req.session.loggedIn
+      loggedIn: req.session.loggedIn //Need to change this line to true
     });
   }
   catch (e) {
@@ -71,7 +71,7 @@ router.get('/posts/:id', async (req, res) => {
     const post = postById.get({ plain: true });
     res.render('single-post', {
       post,
-      loggedIn: true //Need to change this line to req.session.loggedIn
+      loggedIn: req.session.loggedIn //Need to change this line to true
     });
   }
   catch (e) {

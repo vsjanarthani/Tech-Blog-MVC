@@ -56,7 +56,7 @@ router.post('/', sessionAuth, async (req, res) => {
   try {
     // console.log(req.body);
     const { post_title, post_contents} = req.body;
-    const user_id = 'f7922fa0-b26a-4223-b1c5-172799866878'; // should be req.session.user_id
+    const user_id = req.session.user_id;  // should be 'f7922fa0-b26a-4223-b1c5-172799866878'
     // console.log("Post Route", post_title, post_contents);
     const newPost = await Post.create({
       post_title,

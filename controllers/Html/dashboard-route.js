@@ -7,7 +7,7 @@ router.get('/', sessionauth, async (req, res) => {
     try {
         const postsByUser = await Post.findAll({
             where: {
-                user_id: 'f7922fa0-b26a-4223-b1c5-172799866878'   // should change to req.session.user_id
+                user_id: req.session.user_id   // should change to 'f7922fa0-b26a-4223-b1c5-172799866878'
             },
             attributes: [
                 'id',

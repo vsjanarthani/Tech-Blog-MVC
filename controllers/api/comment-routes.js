@@ -54,7 +54,7 @@ router.post('/', sessionAuth, async (req, res) => {
         const { comment, post_id} = req.body;
         const newComment = await Comment.create({
             comment,
-            user_id: '0a9213f9-003e-4fba-9837-e23756924e99',    // change it to res.session.user_id
+            user_id: res.session.user_id,    // change it to res.session.user_id '0a9213f9-003e-4fba-9837-e23756924e99'
             post_id
         });
         res.status(200).json(newComment);

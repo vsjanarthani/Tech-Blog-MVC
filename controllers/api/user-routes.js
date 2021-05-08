@@ -47,57 +47,56 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/users - Sign up
-router.post('/', async (req, res) => {
-  try {
-    const { username, email, password } = req.body
-    const newUser = await User.create({
-      username,
-      email,
-      password
+router.post('/', (req, res) => {
+  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+  User.create({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  })
+    .then(dbUserData => {
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+  
+        res.json(dbUserData);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
     });
-    // req.session.save(() => {
-    //   req.session.user_id = newUser.id;
-    //   req.session.username = newUser.username;
-    //   req.session.loggedIn = true;
-    // });
-    res.status(200).json(newUser);
-  }
-  catch (e) {
-    console.log(e);
-    res.status(400).json({ Error: e });
-  }
 });
 
 // POST /api/users/login
-router.post('/login', async (req, res) => {
+router.post('/login', (req, res) => {
   // expects {email: 'lernantino@gmail.com', password: 'password1234'}
-  try {
-    const { email, password } = req.body
-    const userLogin = await User.findOne({
-      where: { email }
-    });
-    console.log('User Login', userLogin);
-    if (!userLogin.email) {
-      return res.status(400).json({ message: 'No user with that email address!' });
+  User.findOne({
+    where: {
+      email: req.body.email
     }
-    const validPassword = await userLogin.checkPassword(password);
-    console.log(validPassword);
+  }).then(dbUserData => {
+    if (!dbUserData) {
+      res.status(400).json({ message: 'No user with that email address!' });
+      return;
+    }
+
+    const validPassword = dbUserData.checkPassword(req.body.password);
+
     if (!validPassword) {
-      return res.status(400).json({ message: 'Incorrect password!' });
+      res.status(400).json({ message: 'Incorrect password!' });
+      return;
     }
 
-    // req.session.save(() => {
-    //   req.session.user_id = userLogin.id;
-    //   req.session.username = userLogin.username;
-    //   req.session.loggedIn = true; 
-    //   console.log(req.session.user_id);
-    // });
-
-    res.status(200).json({ user: userLogin.username, message: 'You are now logged in!' });
-  }
-  catch (e) {
-    res.status(400).json({ Error: e });
-  }
+    req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+  
+      res.json({ user: dbUserData, message: 'You are now logged in!' });
+    });
+  });
 });
 
 // PUT /api/users/id
