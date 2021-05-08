@@ -7,7 +7,7 @@
             <div class="row col-12 border border-dark">
                 <div class="col-12 p-2 text-white bg-dark d-flex justify-content-between align-items-baseline">
                     <a class="fw-lighter p-2 text-white" href="/posts/{{id}}">{{post_title}}</a>
-                    <h6 class="fst-italic fw-lighter p-2">Posted by {{user.username}} on {{createdAt}}</h6>
+                    <h6 class="fst-italic fw-lighter p-2">Posted by {{user.username}} on {{formatDate createdAt}}</h6>
                 </div>
                 <div class="col-12 p-2 justify-content-center">{{post_contents}}</div>
             </div>

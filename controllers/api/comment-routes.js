@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Comment, Post, User } = require('../../models');
-const sessionAuth = require('../../utils/sessionauth');
+const sessionAuth = require('../../utils/auth');
 
 // GET /api/comments
 router.get('/', async (req, res) => {

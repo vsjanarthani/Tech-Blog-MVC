@@ -60,17 +60,17 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 ### Installation
 To download the application, use 
-```git clone ```. <br>
+```git clone https://github.com/vsjanarthani/Tech-Blog-MVC.git```. <br>
 Inorder to install the necessary dependencies run 
 ```npm install``` 
 in your terminal. 
 
 ### Usage
-After installing all the dependencies, set up the .env file with the username, password and database name. <br> Then, enter 
+After installing all the dependencies, set up the .env file with the username, password database name and session_key. <br> Then, enter 
 ```npm start``` 
 to check if the server is running without any error. <br> If it runs, then enter
 ```npm run seed``` 
-in your terminal to run the seed. <br> For a walkthrough demo click here [Walkthrough-Video](https:).
+to run the seed. <br> For a walkthrough demo click here [Walkthrough-Video](https:).
 
 ### License
 This application is covered under the following license. 

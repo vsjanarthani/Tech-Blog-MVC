@@ -3,7 +3,8 @@ const express = require('express');
 const sequelize = require('./config/connection');
 const routes = require('./controllers');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({ extname: 'hbs', defaultLayout: 'main' });
+const helpers = require('./utils/helpers');
+const hbs = exphbs.create({ extname: 'hbs', defaultLayout: 'main', helpers });
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -22,6 +23,7 @@ app.use(session({
     expiration: 1000*60*30 //Expire after half an hour
   })
 }));
+
 
 // Parsing middleware
 app.use(express.json());
