@@ -1,10 +1,10 @@
 # Tech Post using MVC Architecture [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
-
+This is an application for creating Blog posts. The application allows users to create an account and post their blog posts. Users can also edit/delete their own posts and leave comment on other's post after logging in. Anyone view the homepage which contains blog posts posted by other users. Anyone can view individual posts and its comments as well. To perform other actions, login is required. 
 
 ## Built With
-Node.js (express-handlebars, mysql2, sequelize, nodemon, dotenv, bcrypt, express-session, connect-session-sequalize), HMTL, CSS, JavaScript, ES6, Heroku, Git.
+Node.js (express-handlebars, mysql2, sequelize, nodemon, dotenv, bcrypt, express-session, connect-session-sequalize), HMTL, CSS, MDB, JavaScript, ES6, Heroku, Git.
 
 ## Table of Contents
 * [User-Story](#User-Story)
@@ -15,6 +15,7 @@ Node.js (express-handlebars, mysql2, sequelize, nodemon, dotenv, bcrypt, express
 * [Contributing](#Contributing)
 * [Tests](#Tests)
 * [Screenshot](#Screenshot)
+* [Deployed-Link](#Deployed-Link)
 * [Questions](#Questions)
 
 ### User-Story
@@ -70,7 +71,7 @@ After installing all the dependencies, set up the .env file with the username, p
 ```npm start``` 
 to check if the server is running without any error. <br> If it runs, then enter
 ```npm run seed``` 
-to run the seed. <br> For a walkthrough demo click here [Walkthrough-Video](https:).
+to run the seed.
 
 ### License
 This application is covered under the following license. 
@@ -84,10 +85,12 @@ No contributions at the moment. If anyone wishes to provide contributions, pleas
 No test is set up for this application.
 
 ### Screenshot
-![code](./assets/)
+![code](./assets/screenshot.png)
 
+### Deployed-Link
+The application is deployed on Heroku. Here is the link to the deployed application [(https://my-tech-blog-mvc.herokuapp.com/)]
 ### Questions
 If you have any questions, please reach out to the<br>
 Author: Janarthani V S <br>
-Email 📧: janarthani.vs@gmail.com <br>
+Email : <janarthani.vs@gmail.com> <br>
 Author's github profile: [GitHub](https://github.com/vsjanarthani)
