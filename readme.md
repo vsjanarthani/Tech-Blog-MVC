@@ -88,7 +88,7 @@ No test is set up for this application.
 ![code](./assets/screenshot.png)
 
 ### Deployed-Link
-The application is deployed on Heroku. Here is the link to the deployed application [(https://my-tech-blog-mvc.herokuapp.com/)]
+The application is deployed on Heroku. Link to the deployed application [https://my-tech-blog-mvc.herokuapp.com/](https://my-tech-blog-mvc.herokuapp.com/)
 ### Questions
 If you have any questions, please reach out to the<br>
 Author: Janarthani V S <br>
