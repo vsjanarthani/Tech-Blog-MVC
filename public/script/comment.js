@@ -3,6 +3,7 @@ const addCommentBtnEl = document.querySelector('#create-comment');
 
 // Event listener function
 addCommentBtnEl.addEventListener('click', async (event) => {
+    console.log(addCommentBtnEl);
     event.preventDefault();
     const comment = document.querySelector('textarea[name="post_comment"]').value.trim();
     const post_id = addCommentBtnEl.getAttribute('name');

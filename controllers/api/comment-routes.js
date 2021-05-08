@@ -48,21 +48,19 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/comments
-router.post('/', sessionAuth, async (req, res) => {
-    try {
-        // console.log(req.body);
-        const { comment, post_id} = req.body;
-        const newComment = await Comment.create({
-            comment,
-            user_id: res.session.user_id,    // change it to res.session.user_id '0a9213f9-003e-4fba-9837-e23756924e99'
-            post_id
-        });
-        res.status(200).json(newComment);
-    }
-    catch (e) {
-        res.status(400).json({ Error: e });
-    }
-});
+router.post('/', sessionAuth, (req, res) => {
+    // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
+    Comment.create({
+      comment: req.body.comment,
+      user_id: req.session.user_id,
+      post_id: req.body.post_id
+    })
+      .then(dbCommentData => res.json(dbCommentData))
+      .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  });
 
 // PUT /api/comments/id
 router.put('/:id', async (req, res) => {
