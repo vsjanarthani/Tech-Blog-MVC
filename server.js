@@ -7,7 +7,6 @@ const hbs = exphbs.create({ extname: 'hbs', defaultLayout: 'main' });
 const session = require('express-session');
 const SequalizeStore = require('connect-session-sequelize')(session.Store);
 
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -23,8 +22,6 @@ app.set('view engine', 'hbs');
 
 // middleware for static folder
 app.use(express.static(path.join(__dirname, 'public')));
-app.use("/css", express.static(path.join(__dirname, 'node_modules/mdb-ui-kit/css')));
-app.use("/js", express.static(path.join(__dirname, 'node_modules/mdb-ui-kit/js')));
 
 // Session middleware
 app.use(session({

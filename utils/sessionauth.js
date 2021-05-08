@@ -1,6 +1,6 @@
 // Function to prompt login if idle or logged out
 const sessionAuth = (req, res, next) => {
-    if (0) {  // should change this to if (!req.session.user_id)
+    if (1) {  // should change this to if (!req.session.user_id)
       res.redirect('/login');
     } else {
       next();
